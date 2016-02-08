@@ -1,0 +1,63 @@
+// Imports from NPM
+
+@import '~purecss/build/pure-min.css';
+@import '~purecss/build/grids-responsive-min.css';
+
+
+// Local imports
+
+@import './colors.scss';
+@import './fonts.scss';
+
+
+// Header
+
+.header {
+  height: 75px;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  z-index: 10;
+
+  .title {
+    background-color: $dark-blue;
+    height: 100%;
+  }
+
+  p {
+    color: $white;
+    font-family: 'Pacifico', cursive;
+    font-size: 2em;
+    margin: 0;
+    padding-top: 15px;
+  }
+
+  .cart-icon {
+    background-color: $black;
+    color: $white;
+    cursor: pointer;
+    height: 100%;
+
+    i {
+      padding-top: 10px;
+    }
+  }
+}
+
+
+// Item List
+
+.item-list {
+  padding-top: 85px;
+}
+
+
+// Footer
+
+.footer {
+
+  .logo {
+    margin: auto;
+    width: 290px;
+  }
+}
