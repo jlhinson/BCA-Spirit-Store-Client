@@ -1,43 +1,44 @@
 import React, { Component } from 'react';
+import Slideout from 'slideout';
+
 import { Header } from './header.jsx';
 import { Footer } from './footer.jsx';
 import { ItemList } from './item-list.jsx';
+import { Cart } from './cart.jsx';
 
-/*
-class Counter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { counter: 0 };
-    this.interval = setInterval(() => this.tick(), 1000);
+import './styles/index.scss';
+
+export class App extends Component {
+  constructor() {
+    super();
+    this.handleSlide = this.handleSlide.bind(this);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  tick() {
-    this.setState({
-      counter: this.state.counter + this.props.increment
+  componentDidMount() {
+    this.slideout = new Slideout({
+      'panel': document.getElementById('panel'),
+      'menu': document.getElementById('cart'),
+      'padding': 360,
+      'touch': false,
+      'side': 'right'
     });
   }
 
-  render() {
-    return (
-      <h1 style={{ color: this.props.color }}>
-        Counter ({this.props.increment}): {this.state.counter}
-      </h1>
-    );
+  handleSlide() {
+    this.slideout.toggle();
   }
-}
-*/
 
-export class App extends Component {
   render() {
     return (
       <div id="app">
-        <Header />
-        <ItemList />
-        <Footer />
+        <Header onHandleSlide={this.handleSlide}/>
+        <div id="cart">
+          <Cart />
+        </div>
+        <div id="panel">
+          <ItemList />
+          <Footer />
+        </div>
       </div>
     );
   }

@@ -1,4 +1,3 @@
-var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -9,7 +8,7 @@ module.exports = {
     './src/index'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: './dist',
     filename: 'bundle.js'
   },
   plugins: [
@@ -34,27 +33,32 @@ module.exports = {
     preLoaders: [{
       test: /\.jsx?$/,
       loader: 'eslint',
-      include: path.join(__dirname, 'src')
+      include: /src/
     }],
     loaders: [{
       test: /\.jsx?$/,
       loader: 'babel',
-      include: path.join(__dirname, 'src')
+      include: /src/
     },
     {
       test: /\.scss$/,
       loader: ExtractTextPlugin.extract('css!sass'),
-      include: path.join(__dirname, 'src/styles')
+      include: /src/
     },
     {
-      test: /\.ttf$/,
-      loader: 'url?limit=100000',
-      include: path.join(__dirname, 'src/assets/fonts')
+      test: /\.(ttf|eot)$/,
+      loader: 'url?limit=200000',
+      include: /(src|node_modules\/font-awesome)/
     },
     {
-      test: /\.png$/,
-      loader: 'file?name=img/[hash:7].[ext]',
-      include: path.join(__dirname, 'src/assets')
+      test: /\.(eot|svg|ttf|woff|woff2)(\?.+)$/,
+      loader: 'url?limit=200000',
+      include: /node_modules\/font-awesome/
+    },
+    {
+      test: /\.(png|ico)$/,
+      loader: 'file?name=img/[name].[ext]',
+      include: /src/
     }]
   }
 };

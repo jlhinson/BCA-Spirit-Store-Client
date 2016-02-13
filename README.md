@@ -1,6 +1,9 @@
 # BCA-Store
 BCA Store Front
 
+## Todo (now)
+- tbd
+
 ## Todo (next version)
 - Save transactions to database
 - 404 error page

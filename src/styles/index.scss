@@ -2,12 +2,37 @@
 
 @import '~purecss/build/pure-min.css';
 @import '~purecss/build/grids-responsive-min.css';
+@import '~font-awesome/css/font-awesome.min.css';
 
 
 // Local imports
 
 @import './colors.scss';
 @import './fonts.scss';
+
+
+// Index
+
+body {
+  background-color: $white;
+  color: $black;
+  // required for cart (slideout)
+  height: 100%;
+  width: 100%;
+
+  @media screen and (min-height: 950px) {
+    position: absolute;
+  }
+}
+
+html,
+button,
+input,
+select,
+textarea,
+.pure-g [class *= "pure-u"] {
+  font-family: 'Work Sans', sans-serif;
+}
 
 
 // Header
@@ -29,10 +54,10 @@
     font-family: 'Pacifico', cursive;
     font-size: 2em;
     margin: 0;
-    padding-top: 15px;
+    padding-top: 5px;
   }
 
-  .cart-icon {
+  .cart {
     background-color: $black;
     color: $white;
     cursor: pointer;
@@ -42,13 +67,69 @@
       padding-top: 10px;
     }
   }
+
+  .cart-qty {
+    font-size: 20px;
+    font-weight: bold;
+  }
 }
 
 
 // Item List
 
 .item-list {
+  margin: auto;
+  max-width: 1100px;
   padding-top: 85px;
+  position: relative;
+}
+
+.item-unit {
+  max-height: 410px;
+  overflow: hidden;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  position: relative;
+  text-align: center;
+
+  .item-background {
+    background-color: $iron;
+    border-radius: 25px;
+    margin: auto;
+    max-width: 90%;
+    padding: 5px 0;
+    position: relative;
+  }
+
+  .item-image {
+    border: 1px solid $iron;
+    border-radius: 20px;
+    margin: auto;
+    max-height: 300px;
+    max-width: 70%;
+  }
+
+  legend {
+    text-align: center;
+  }
+
+  .center-input {
+    margin: auto;
+    width: 70%;
+
+    input {
+      text-align: center;
+    }
+  }
+
+  .submit-button {
+    background-color: transparent;
+    border: 0;
+    color: $icon;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+  }
 }
 
 
@@ -60,4 +141,175 @@
     margin: auto;
     width: 290px;
   }
+}
+
+//-------------------------------------
+// Cart (slideout)
+
+.slideout-menu {
+  background-color: $iron;
+  bottom: 0;
+  display: none;
+  left: auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  padding-top: 90px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 320px;
+  z-index: 0;
+
+  i {
+    cursor: pointer;
+    left: 10px;
+    position: absolute;
+    top: 85px;
+  }
+
+  .remove-note {
+    font-size: 12px;
+    font-style: italic;
+    padding-bottom: 15px;
+    text-align: center;
+  }
+
+  .cart-checkout {
+    margin-top: 20px;
+    text-align: center;
+  }
+}
+
+.pure-table {
+  max-width: 98%;
+
+  thead {
+    background-color: $silver-sand;
+  }
+
+  th,
+  td {
+    text-align: center;
+  }
+}
+
+.slideout-panel {
+  background-color: $white;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+  overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+  display: block;
+}
+
+@media screen and (min-width: 360px) {
+  .slideout-menu {
+    width: 360px;
+  }
+}
+
+// Checkout
+
+.notice {
+  h4 {
+    margin: 0;
+    padding: 5px;
+    text-align: center;
+  }
+
+  ul {
+    margin: 0;
+    padding-bottom: 7px;
+  }
+}
+
+.checkout-form {
+  text-align: center;
+
+  fieldset {
+    padding: 0;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  button {
+    margin: .7em 0 0;
+  }
+
+  .button-error {
+    margin-right: 30px;
+  }
+}
+
+.modal-checkout {
+  overflow-y: auto;
+
+}
+
+// Modals
+
+.modal {
+  max-height: 80%;
+  max-width: 320px;
+  padding: 15px 0;
+
+  .button-error {
+    margin-right: 20px;
+  }
+}
+
+.submitted-modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 360px) {
+  .modal {
+    max-width: 350px;
+    padding: 15px 5px;
+  }
+}
+
+// Alerts
+
+.s-alert-info {
+  background-color: $icon;
+  color: $white;
+}
+
+// Buttons
+
+.button-success,
+.button-error,
+.button-blue {
+  border-radius: 4px;
+  color: $white;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+}
+
+.button-success {
+  background-color: $success;
+}
+
+.button-error {
+  background-color: $error;
+}
+
+.button-blue {
+  background-color: $dark-blue;
+}
+
+// Utilities
+
+.center {
+  text-align: center;
 }

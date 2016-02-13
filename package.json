@@ -6,7 +6,7 @@
   "scripts": {
     "build-webpack": "webpack --config webpack.config.prod.js --progress --profile",
     "build": "npm run clean && npm run build-webpack",
-    "clean": "rimraf dist/client",
+    "clean": "rimraf dist",
     "start": "node devServer.js"
   },
   "repository": {
@@ -16,11 +16,13 @@
   "author": "John Hinson",
   "license": "MIT",
   "dependencies": {
+    "font-awesome": "^4.5.0",
     "koa": "^1.1.2",
     "koa-static": "^2.0.0",
     "purecss": "^0.6.0",
     "react": "^0.14.6",
-    "react-dom": "^0.14.6"
+    "react-dom": "^0.14.6",
+    "slideout": "^0.1.12"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",
@@ -39,7 +41,6 @@
     "koa-webpack-dev-middleware": "^1.1.0",
     "koa-webpack-hot-middleware": "^1.0.3",
     "node-sass": "^3.4.2",
-    "path": "^0.12.7",
     "rimraf": "^2.5.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",

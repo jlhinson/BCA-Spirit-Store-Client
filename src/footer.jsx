@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-const FooterLogoUrl = require('./assets/logo-wide.png');
+require('./assets/logo-wide.png');
 
 export class Footer extends Component {
   render() {
@@ -7,7 +7,7 @@ export class Footer extends Component {
       <footer>
         <div className="footer">
           <div className="logo">
-            <a href="https://www.bcatrojans.com/"><img className="pure-img" src={FooterLogoUrl}></img></a>
+            <a href="https://www.bcatrojans.com/"><img className="pure-img" src="img/logo-wide.png"></img></a>
           </div>
         </div>
       </footer>

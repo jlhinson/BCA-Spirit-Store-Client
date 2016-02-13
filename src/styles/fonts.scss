@@ -1,6 +1,17 @@
 // Fonts
 
 @font-face {
+  font-family: 'Work Sans';
+  src: url('./../assets/fonts/WorkSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('./../assets/fonts/WorkSans-Bold.ttf');
+  font-weight: bold;
+}
+
+@font-face {
   font-family: 'Pacifico';
   src: url('./../assets/fonts/Pacifico.ttf');
 }
