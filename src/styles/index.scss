@@ -69,8 +69,10 @@ textarea,
   }
 
   .cart-qty {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
+    padding-top: 15px;
+    text-align: right;
   }
 }
 
@@ -182,6 +184,7 @@ textarea,
 
 .pure-table {
   max-width: 98%;
+  margin: auto;
 
   thead {
     background-color: $silver-sand;
@@ -198,6 +201,11 @@ textarea,
   height: 100%;
   position: relative;
   z-index: 1;
+
+  @media screen and (min-height: 950px) {
+    position: absolute;
+    width: 100%;
+  }
 }
 
 .slideout-open,

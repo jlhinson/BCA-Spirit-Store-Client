@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Slideout from 'slideout';
 
-import { Header } from './header.jsx';
+import Header from './header.jsx';
 import { Footer } from './footer.jsx';
-import { ItemList } from './item-list.jsx';
-import { Cart } from './cart.jsx';
+import ItemList from './item-list.jsx';
+import Cart from './cart.jsx';
 
 import './styles/index.scss';
 
@@ -33,7 +33,7 @@ export class App extends Component {
       <div id="app">
         <Header onHandleSlide={this.handleSlide}/>
         <div id="cart">
-          <Cart />
+          <Cart onHandleSlide={this.handleSlide}/>
         </div>
         <div id="panel">
           <ItemList />

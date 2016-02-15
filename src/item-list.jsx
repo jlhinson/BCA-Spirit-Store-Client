@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addCartItem } from './store/actions.js';
+
+
 require('./assets/items/bca-blue-on-grey.png');
 require('./assets/items/athletics-white-on-blue.png');
 require('./assets/items/bca-water-bottle.png');
@@ -30,6 +34,23 @@ class SizeList extends Component {
 class Item extends Component {
   constructor(props) {
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    let itemName = e.target.name.value;
+    let itemSize = e.target.size ? e.target.size.value : '';
+    let itemQty = Number(e.target.qty.value);
+    let itemPrice = Number(e.target.priceStrip.value);
+
+    if (itemQty < 1) {
+      console.log('throw alert for qty < 1');
+      return;
+    }
+
+    this.props.dispatch(addCartItem(itemName, itemSize, itemQty, itemPrice));
   }
 
   render() {
@@ -42,7 +63,7 @@ class Item extends Component {
 
           <img className="pure-img item-image" src={this.props.item.image} />
 
-            <form className="pure-form pure-form-stacked">
+            <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit}>
               <fieldset>
 
                 <legend>{this.props.item.name}</legend>
@@ -83,38 +104,16 @@ class Item extends Component {
   }
 }
 
+Item = connect()(Item);
 
-export class ItemList extends Component {
+class ItemList extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
 
-    const items = [
-      {
-        id: 1,
-        name: 'BCA',
-        image: 'img/bca-blue-on-grey.png',
-        price: 10,
-        sizes: ['YM', 'YL', 'S', 'M', 'L', 'XL', 'XXL']
-      },
-      {
-        id: 2,
-        name: 'BCA Athletics',
-        image: 'img/athletics-white-on-blue.png',
-        price: 15,
-        sizes: ['S', 'M', 'L', 'XL']
-      },
-      {
-        id: 3,
-        name: 'BCA Water Bottle',
-        image: 'img/bca-water-bottle.png',
-        price: 6
-      },
-      {
-        id: 4,
-        name: 'BCA Tote',
-        image: 'img/athletics-cinch.png',
-        price: 12
-      }
-    ];
+    const { items } = this.props;
 
     return (
       <div className="pure-g item-list">
@@ -127,3 +126,13 @@ export class ItemList extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    items: state.toJS().items
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(ItemList);
