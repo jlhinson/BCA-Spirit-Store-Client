@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addCartItem } from './store/actions.js';
+
+import { addCartItem, updateCartTotal, showAlert } from './store/actions.js';
 
 
 require('./assets/items/bca-blue-on-grey.png');
@@ -44,13 +45,14 @@ class Item extends Component {
     let itemSize = e.target.size ? e.target.size.value : '';
     let itemQty = Number(e.target.qty.value);
     let itemPrice = Number(e.target.priceStrip.value);
+    let amount = itemQty * itemPrice;
 
     if (itemQty < 1) {
-      console.log('throw alert for qty < 1');
+      this.props.onAlert('Quantity less than 1');
       return;
     }
 
-    this.props.dispatch(addCartItem(itemName, itemSize, itemQty, itemPrice));
+    this.props.onClick(itemName, itemSize, itemQty, itemPrice, amount);
   }
 
   render() {
@@ -104,8 +106,6 @@ class Item extends Component {
   }
 }
 
-Item = connect()(Item);
-
 class ItemList extends Component {
   constructor(props) {
     super(props);
@@ -113,13 +113,13 @@ class ItemList extends Component {
 
   render() {
 
-    const { items } = this.props;
+    const { items, onAddToCart, alert } = this.props;
 
     return (
       <div className="pure-g item-list">
         {
           items.map(function(item) {
-            return <Item key={item.id} item={item} />;
+            return <Item key={item.id} item={item} onClick={onAddToCart} onAlert={alert}/>;
           })
         }
       </div>
@@ -133,6 +133,19 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddToCart: (name, size, qty, price, amount) => {
+      dispatch(addCartItem(name, size, qty, price));
+      dispatch(updateCartTotal(amount));
+    },
+    alert: (text) => {
+      dispatch(showAlert(text));
+    }
+  };
+};
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ItemList);

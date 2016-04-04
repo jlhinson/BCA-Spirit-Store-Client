@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Slideout from 'slideout';
 
+import Alerts from './alerts.jsx';
+import Modals from './modals.jsx';
 import Header from './header.jsx';
 import { Footer } from './footer.jsx';
 import ItemList from './item-list.jsx';
@@ -31,6 +33,8 @@ export class App extends Component {
   render() {
     return (
       <div id="app">
+        <Alerts />
+        <Modals />
         <Header onHandleSlide={this.handleSlide}/>
         <div id="cart">
           <Cart onHandleSlide={this.handleSlide}/>

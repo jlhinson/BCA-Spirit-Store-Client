@@ -1,7 +1,10 @@
-import { ADD_CART_ITEM } from './actions.js';
+import { ADD_CART_ITEM, REMOVE_CART_ITEM, UPDATE_CART_TOTAL, ADD_ALERT, REMOVE_ALERT, SET_MODAL } from './actions.js';
 import Immutable from 'immutable';
 
 const initialState = Immutable.fromJS({
+  alerts: [],
+  alertTime: 4000,
+  modalSelect: 0,
   items: [
     {
       id: 1,
@@ -37,13 +40,27 @@ const initialState = Immutable.fromJS({
 function appState(state = initialState, action) {
   switch (action.type) {
   case ADD_CART_ITEM:
-    return state.updateIn(['cartItems'], list => list.push({
+    return state.update('cartItems', list => list.push({
       id: Math.floor((Math.random() * 10000) +1),
       name: action.name,
       size: action.size,
       qty: action.qty,
       price: action.price
     }));
+  case REMOVE_CART_ITEM:
+    let index = state.get('cartItems').findIndex(function(obj) {return obj.id === action.id;});
+    return state.deleteIn(['cartItems', index]);
+  case UPDATE_CART_TOTAL:
+    return state.update('cartTotal', value => value + action.amount);
+  case ADD_ALERT:
+    return state.update('alerts', list => list.push({
+      id: Math.floor((Math.random() * 10000) +1),
+      text: action.text
+    }));
+  case REMOVE_ALERT:
+    return state.deleteIn(['alerts', 0]);
+  case SET_MODAL:
+    return state.set('modalSelect', action.index);
   default:
     return state;
   }

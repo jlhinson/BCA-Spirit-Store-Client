@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { removeCartItem, updateCartTotal, showAlert, setModal } from './store/actions.js';
 
-class CartList extends Component {
+export class CartItem extends Component {
   constructor(props) {
     super(props);
+    this.handleRemove = this.handleRemove.bind(this);
+  }
+
+  handleRemove() {
+    let amount = this.props.item.qty * this.props.item.price * -1;
+    this.props.onClick(this.props.item.id, amount);
   }
 
   render() {
@@ -12,7 +19,7 @@ class CartList extends Component {
     const price = '$' + this.props.item.price;
 
     return (
-      <tr className="cart-item">
+      <tr className="cart-item" onClick={this.props.onClick ? this.handleRemove : ''}>
         <td>{name}</td>
         <td>{size}</td>
         <td>{qty}</td>
@@ -25,16 +32,26 @@ class CartList extends Component {
 class Cart extends Component {
   constructor(props) {
     super(props);
+    this.handleCheckout = this.handleCheckout.bind(this);
+  }
+
+  handleCheckout() {
+    if (this.props.cartList.length === 0) {
+      this.props.alert('No items in cart');
+      return;
+    }
+    this.props.callModal(1);
+
   }
 
   render() {
 
-    const { cartList } = this.props;
+    const { cartList, onCartItemClick } = this.props;
     const total = '$' + this.props.cartTotal;
 
     return (
       <div>
-        <i className="fa fa-arrow-left fa-2x" onClick={this.props.onHandleSlide} />
+        <i className="fa fa-arrow-right fa-2x" onClick={this.props.onHandleSlide} />
 
         <div className="remove-note">click item to remove</div>
 
@@ -51,10 +68,9 @@ class Cart extends Component {
           <tbody>
             {
               cartList.map(function(item) {
-                return <CartList key={item.id} item={item} />;
+                return <CartItem key={item.id} item={item} onClick={onCartItemClick}/>;
               })
             }
-
             <tr>
               <td></td>
               <td></td>
@@ -65,7 +81,7 @@ class Cart extends Component {
         </table>
 
         <div className="cart-checkout">
-          <button className="button-blue pure-button">Checkout</button>
+          <button className="button-blue pure-button" onClick={this.handleCheckout}>Checkout</button>
         </div>
       </div>
     );
@@ -79,6 +95,22 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCartItemClick: (id, amount) => {
+      dispatch(removeCartItem(id));
+      dispatch(updateCartTotal(amount));
+    },
+    alert: (text) => {
+      dispatch(showAlert(text));
+    },
+    callModal: (index) => {
+      dispatch(setModal(index));
+    }
+  };
+};
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Cart);

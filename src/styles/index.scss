@@ -52,7 +52,7 @@ textarea,
   p {
     color: $white;
     font-family: 'Pacifico', cursive;
-    font-size: 2em;
+    font-size: 1.8em;
     margin: 0;
     padding-top: 5px;
   }
@@ -76,6 +76,11 @@ textarea,
   }
 }
 
+@media screen and (min-width: 370px) {
+  .header p {
+    font-size: 2.1em;
+  }
+}
 
 // Item List
 
@@ -145,7 +150,7 @@ textarea,
   }
 }
 
-//-------------------------------------
+
 // Cart (slideout)
 
 .slideout-menu {
@@ -224,6 +229,42 @@ textarea,
   }
 }
 
+
+// Modals
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 90;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -160px;
+  margin-top: -265px;
+  background-color: $white;
+  border-radius: 5px;
+  height: 500px;
+  width: 320px;
+  padding: 15px 0;
+  overflow-y: auto;
+}
+
+@media screen and (min-width: 370px) {
+  .modal {
+    width: 370px;
+    margin-left: -190px;
+    padding: 15px 5px;
+  }
+}
+
+
 // Checkout
 
 .notice {
@@ -250,49 +291,40 @@ textarea,
     width: 100%;
   }
 
-  button {
+  .button-error {
+    margin: .7em 1em 0;
+  }
+
+  .button-blue {
     margin: .7em 0 0;
   }
-
-  .button-error {
-    margin-right: 30px;
-  }
 }
 
-.modal-checkout {
-  overflow-y: auto;
 
+// Notifications
+.alerts {
+  position: fixed;
+  bottom: 10px;
+  right:10px;
+  z-index: 100;
 }
 
-// Modals
-
-.modal {
-  max-height: 80%;
-  max-width: 320px;
-  padding: 15px 0;
-
-  .button-error {
-    margin-right: 20px;
-  }
-}
-
-.submitted-modal {
-  text-align: center;
-}
-
-@media screen and (min-width: 360px) {
-  .modal {
-    max-width: 350px;
-    padding: 15px 5px;
-  }
-}
-
-// Alerts
-
-.s-alert-info {
-  background-color: $icon;
+.alert {
+  position: relative;;
+  background-color: $error;
   color: $white;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 2px $silver-sand;
+  padding: 15px;
+  margin-bottom: 15px;
+  opacity: 0;
+  transition: opacity 0.5s linear;
+
+  h4 {
+    margin: 0;
+  }
 }
+
 
 // Buttons
 
@@ -315,6 +347,7 @@ textarea,
 .button-blue {
   background-color: $dark-blue;
 }
+
 
 // Utilities
 
