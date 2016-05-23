@@ -1,0 +1,10 @@
+.header {
+  background-color: #033e8c;
+  height: 75px;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  font-family: 'Pacifico', cursive;
+  font-size: 1.8em;
+  color: #fff;
+}
