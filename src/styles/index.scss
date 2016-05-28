@@ -4,12 +4,10 @@
 @import '~purecss/build/grids-responsive-min.css';
 @import '~font-awesome/css/font-awesome.min.css';
 
-
 // Local imports
 
 @import './colors.scss';
 @import './fonts.scss';
-
 
 // Index
 
@@ -30,10 +28,9 @@ button,
 input,
 select,
 textarea,
-.pure-g [class *= "pure-u"] {
+.pure-g [class*="pure-u"] {
   font-family: 'Work Sans', sans-serif;
 }
-
 
 // Header
 
@@ -139,7 +136,6 @@ textarea,
   }
 }
 
-
 // Footer
 
 .footer {
@@ -149,7 +145,6 @@ textarea,
     width: 290px;
   }
 }
-
 
 // Cart (slideout)
 
@@ -229,7 +224,6 @@ textarea,
   }
 }
 
-
 // Modals
 
 .overlay {
@@ -239,7 +233,7 @@ textarea,
   height: 100%;
   width: 100%;
   z-index: 90;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .modal {
@@ -263,7 +257,6 @@ textarea,
     padding: 15px 5px;
   }
 }
-
 
 // Checkout
 
@@ -292,25 +285,24 @@ textarea,
   }
 
   .button-error {
-    margin: .7em 1em 0;
+    margin: 0.7em 1em 0;
   }
 
   .button-blue {
-    margin: .7em 0 0;
+    margin: 0.7em 0 0;
   }
 }
-
 
 // Notifications
 .alerts {
   position: fixed;
   bottom: 10px;
-  right:10px;
+  right: 10px;
   z-index: 100;
 }
 
 .alert {
-  position: relative;;
+  position: relative;
   background-color: $error;
   color: $white;
   border-radius: 5px;
@@ -325,7 +317,6 @@ textarea,
   }
 }
 
-
 // Buttons
 
 .button-success,
@@ -333,7 +324,7 @@ textarea,
 .button-blue {
   border-radius: 4px;
   color: $white;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .button-success {
@@ -347,7 +338,6 @@ textarea,
 .button-blue {
   background-color: $dark-blue;
 }
-
 
 // Utilities
 

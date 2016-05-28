@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var styleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
@@ -27,12 +28,16 @@ module.exports = {
       template: './src/index-template.html',
       inject: 'body'
     }),
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('style.css'),
+    new styleLintPlugin({
+      syntax: 'scss',
+      failOnError: true
+    })
   ],
   module: {
     preLoaders: [{
       test: /\.jsx?$/,
-      loader: 'eslint',
+      loader: 'eslint-loader',
       include: /src/
     }],
     loaders: [{
@@ -60,5 +65,9 @@ module.exports = {
       loader: 'file?name=img/[name].[ext]',
       include: /src/
     }]
+  },
+  eslint: {
+    failOnError: true,
+    failOnWarning: true
   }
 };

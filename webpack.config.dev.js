@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var styleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -17,12 +18,15 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index-template.html',
       inject: 'body'
+    }),
+    new styleLintPlugin({
+      syntax: 'scss'
     })
   ],
   module: {
     preLoaders: [{
       test: /\.jsx?$/,
-      loader: 'eslint',
+      loader: 'eslint-loader',
       include: /src/
     }],
     loaders: [{
